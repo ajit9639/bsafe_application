@@ -64,16 +64,21 @@
             
 
             if(isset($_POST['submit'])){             
-
+              $date = date("d-m-Y");
               $pid = $_SESSION['MEMBER_ID'];
               $cid = $_SESSION['user_id'];
-              $leave_from = $_POST['leave_from'];
-              $leave_to = $_POST['leave_to'];
-              $reason = $_POST['reason'];
+              $month = $_POST['month'];
+              $amout_to_pay = $_POST['amout_to_pay'];
+              $pay_mode = $_POST['pay_mode'];
 
-              $sql = "insert into `tbl_leave`(`pid`, `cid`, `reason`, `leave_from`, `leave_to`) values('$pid','$cid','$reason','$leave_from','$leave_to')";
+              $sql = "insert into `tbl_child_payment`(`pid`, `cid`, `month`, `amout_to_pay`, `pay_mode`) values('$pid','$cid','$month','$amout_to_pay','$pay_mode')";
               if(mysqli_query($conn,$sql)){
-                echo "<script>alert('Leave Applied successfully')</script>";
+                echo "<script>alert('Please Your payment Processing..')</script>";
+                if($pay_mode == "online"){
+                  echo "<script>window.location.href='get_invoice.php?date=$date&amount=$amout_to_pay&payMode=$pay_mode&pid=$pid&cid=$cid&month=$month'</script>"; 
+                }else{
+                  echo "<script>window.location.href='get_invoice.php?date=$date&amount=$amout_to_pay&payMode=$pay_mode&pid=$pid&cid=$cid&month=$month'</script>"; 
+                }
               }else{echo $conn->error;}
               
             }
@@ -105,7 +110,7 @@
             <!-- Horizontal Form -->
             <div class="card card-purple">
               <div class="card-header">
-                <h3 class="card-title"><?php echo "Apply Leave For Your Child";?></h3>
+                <h3 class="card-title"><?php echo "Pay Your Child Transportation Fee";?></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -120,25 +125,36 @@
                   </div>
 
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Leave Date From</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Today Date</label>
                     <div class="col-sm-10">
-                      <input type="date" class="form-control"  name="leave_from"  placeholder="Date of Birth">
+                      <input type="text" class="form-control"  placeholder="Date of Birth" value="<?= date('d-m-Y')?>" readonly>
                     </div>
                   </div>
 
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Leave Date To</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Month</label>
                     <div class="col-sm-10">
-                      <input type="date" class="form-control"  name="leave_to"  placeholder="Date of Birth">
+                      <input type="text" class="form-control"  name="month"  placeholder="Date of Birth" value="<?= date('M')?>" readonly>
                     </div>
                   </div>                 
                                                                              
                   <div class="form-group row">
-                    <label for="txtSchoolName" class="col-sm-2 col-form-label">Leave Reason</label>
+                    <label for="txtSchoolName" class="col-sm-2 col-form-label">Total Due Amount</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="reason" placeholder="School Name">
+                      <input type="text" class="form-control" name="amout_to_pay" placeholder="School Name" value="2000" readonly>
                     </div>
-                  </div>                                       
+                  </div>
+                  
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Payment Mode</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" name="pay_mode">
+                        <option disabled>Select Your Payment Mode</option>
+                        <option value="online">Online</option>
+                        <option value="offline">Offline</option>
+                      </select>
+                    </div>
+                  </div>
                    
                 </div>
                 <!-- /.card-body -->

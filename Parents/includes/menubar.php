@@ -40,7 +40,7 @@
           </li>
 <!-- =================================================================== -->          
           <li class="nav-item">
-            <a href="<?php echo PaymentHistory;?>" class="nav-link">
+            <a href="payment_history.php" class="nav-link">
               <i class="fas fa-rupee-sign nav-icon"></i>
               <p>Payment</p>
             </a>
@@ -54,11 +54,21 @@
           </li>
 <!-- =================================================================== -->          
           <li class="nav-item">
+            <a href="view_leave.php" class="nav-link">
+              <i class="fas fa-ambulance nav-icon"></i>
+              <p>Apply Leave</p>
+            </a>
+          </li>          
+
+          <!-- =================================================================== -->          
+          <li class="nav-item">
             <a href="<?php echo VehicleDetail;?>" class="nav-link">
               <i class="fas fa-bus nav-icon"></i>
               <p>Vehicle Detail</p>
             </a>
-          </li>          
+          </li>     
+
+          
 <!-- =================================================================== -->          
           <li class="nav-item">
             <a href="<?php echo Logout;?>" class="nav-link">
