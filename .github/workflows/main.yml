@@ -15,6 +15,3 @@ jobs:
         username: ajit@bsafeapp.in
         password: ${{ secrets.ftp_password }}
         # 
-
-
-      
